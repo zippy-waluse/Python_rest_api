@@ -11,7 +11,7 @@ class Period (models.Model):
     classroom = models.CharField(max_length=10)
     date_of_the_week = models.DateField()
 
-    
+    objects = models.Manager()
     def __str__(self):
          return f"{self.start_time} {self.end_time}"
 

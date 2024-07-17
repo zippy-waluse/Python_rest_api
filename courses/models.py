@@ -11,6 +11,6 @@ class Course(models.Model):
     assessment_requirements = models.TextField()
     course_fee = models.IntegerField()
 
-
+    objects = models.Manager()
     def __str__(self):
          return f"{self.course_name}"
