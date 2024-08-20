@@ -5,7 +5,7 @@ from teacher.models import Teacher
 from classes.models import Classes
 from courses.models import Course
 from classperiod.models import Period
-from .serializer import StudentSerializer
+from .serializer import MinimalSerializer, StudentSerializer
 from .serializer import TeacherSerializer
 from .serializer import ClassperiodSerializer
 from .serializer import ClassesSerializer
@@ -34,8 +34,8 @@ class StudentListView(APIView):
     
 class StudentDetailView(APIView):
     def get(self,request,id):
-        courses=Students.objects.get(id=id)
-        serializer =CoursesSerializer(courses)
+        courses=Students.objects.all()
+        serializer = MinimalSerializer(Students,many=True)
         return Response(serializer.data)
     
     def put(self, request,id):
@@ -53,17 +53,17 @@ class StudentDetailView(APIView):
         student.delete()
         return Response(serializer.errors,status=status.HTTP_202_ACCEPTED)    
     
-    def enroll_student(student,course_id):
-        Course=Course.objects.get(id=course_id)
-        student.course.add(Course)
+    # def enroll_student(student,course_id):
+    #     Course=Course.objects.get(id=course_id)
+    #     student.course.add(Course)
 
-    def post(self,request,id):
-        Students=Students.objects.get(id=id)
-        action = request.data.get("action")
-        if action== "enroll":
-           course_id=request.data.get("course")
-           self.enroll_student(Students,course_id)
-        return Response(status.HTTP_201_ACCEPTED)       
+    # def post(self,request,id):
+    #     Students=Students.objects.get(id=id)
+    #     action = request.data.get("action")
+    #     if action== "enroll":
+    #        course_id=request.data.get("course")
+    #        self.enroll_student(Students,course_id)
+    #     return Response(status.HTTP_201_ACCEPTED)       
 
 
 class TeacherListView(APIView):

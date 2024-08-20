@@ -32,4 +32,9 @@ class ClassperiodSerializer(serializers.ModelSerializer):
 class ClassesSerializer(serializers.ModelSerializer):
     class Meta:
          model = Classes
-         fields = '__all__'         
+         fields = '__all__'      
+
+class MinimalSerializer(serializers.ModelSerializer):
+     class Meta:
+          model= Students
+          fields = ["first_name","email"]            
