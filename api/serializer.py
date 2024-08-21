@@ -3,6 +3,7 @@ from student.models import Students
 from teacher.models import Teacher
 from courses.models import Course
 from classperiod.models import Period
+from teacher.models import  Teacher
 from classes.models import Classes
 
 class MinimalStudentSerializer(serializers.ModelSerializer):
@@ -10,12 +11,12 @@ class MinimalStudentSerializer(serializers.ModelSerializer):
         model = Students
         fields = ['first_name', 'email']
 
-class StudentSerializer(serializers.ModelSerializer):
-    teacher = TeacherSerializer()
-    class Meta:
-        model = Students
-        fields = '__all__'
-
+# class StudentSerializer(serializers.ModelSerializer):
+#     teacher = MinimalTeacherSerializerr()
+#     class Meta:
+#         model = Students
+#         fields = '__all__'
+ 
 class MinimalTeacherSerializer(serializers.ModelSerializer):
     class Meta:
         model = Teacher
